@@ -45,5 +45,28 @@
   const app = express();
   
   app.use(bodyParser.json());
+
+  let todo = ['Get to gym', 'Get dressed'];
+
+  app.get('/todos',(req,res)=>{
+    res.json(todo);
+  })
+
+  app.get('/todos/:id',(req, res)=>{
+    const todo = todo.find(t => t.id === parseInt(req.params.id));
+    if(!todo){
+      res.status(404).send();
+    }
+    else{
+      res.send(todo);
+    }
+  });
+
+
+
   
+
+
+
+  app.listen(3000);
   module.exports = app;
